@@ -8,9 +8,17 @@ req.get(reqUrl, (err, res, body) => {
   } else {
     const movies = JSON.parse(body);
     const WedgeAntilles = 'https://swapi-api.hbtn.io/api/people/18/';
-    const moviesWedgeAntilles = movies.results.filter(
-      (movie) => movie.characters.includes(WedgeAntilles)
-    );
-    console.log(moviesWedgeAntilles.length);
+    const chars = movies.results[0].characters;
+    if (chars.includes(WedgeAntilles)) {
+      req.get(WedgeAntilles, (erro, resp, Body) => {
+        if (erro) {
+          console.error(erro);
+        } else {
+          const wedge = JSON.parse(Body);
+          const filmsCount = wedge.films.length;
+          console.log(filmsCount);
+        }
+      });
+    }
   }
 });
