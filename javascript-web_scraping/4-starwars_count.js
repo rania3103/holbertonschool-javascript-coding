@@ -10,11 +10,11 @@ req.get(reqUrl, (err, res, body) => {
     const WedgeAntilles = 'https://swapi-api.hbtn.io/api/people/18/';
     const chars = movies.results[0].characters;
     if (chars.includes(WedgeAntilles)) {
-      req.get(WedgeAntilles, (erro, resp, Body) => {
+      req.get(WedgeAntilles, async (erro, resp, Body) => {
         if (erro) {
           console.error(erro);
         } else {
-          const wedge = JSON.parse(Body);
+          const wedge = await JSON.parse(Body);
           const filmsCount = wedge.films.length;
           console.log(filmsCount);
         }
